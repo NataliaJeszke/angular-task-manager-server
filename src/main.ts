@@ -5,9 +5,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    methods: 'GET, HEAD, PATCH, POST, PUT, DELETE',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
-    .setTitle('Task Manager API')
-    .setDescription('Mock API for the Angular Task Manager application')
+    .setTitle('TaskNest API')
+    .setDescription('Mock API for the Angular TaskNest application')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -16,4 +22,3 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
-
